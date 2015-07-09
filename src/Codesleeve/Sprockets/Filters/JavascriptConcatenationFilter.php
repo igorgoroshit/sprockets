@@ -26,6 +26,6 @@ class JavascriptConcatenationFilter implements FilterInterface
  	 */
     public function filterDump(AssetInterface $asset)
     {
-		$asset->setContent($asset->getContent() . ';');
+			$asset->setContent($asset->getContent() . ';');
     }
 }

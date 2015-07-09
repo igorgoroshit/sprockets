@@ -29,6 +29,7 @@ class SprocketsFilter implements FilterInterface
 
         $absoluteFilePaths = $this->parser->getFilesArrayFromDirectives($absolutePath);
 
+
         foreach ($absoluteFilePaths as $absoluteFilePath)
         {
             $files[] = $this->generator->cachedFile($absoluteFilePath);

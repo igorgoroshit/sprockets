@@ -25,7 +25,8 @@ class SprocketsGenerator implements Interfaces\GeneratorInterface
      */
     public function javascript($absolutePath)
     {
-        return $this->cached($absolutePath)->dump();
+        $temp = $this->cached($absolutePath);
+        return $temp->dump();
     }
 
     /**
@@ -49,8 +50,11 @@ class SprocketsGenerator implements Interfaces\GeneratorInterface
     public function file($absolutePath, $concat = null)
     {
         $concat = is_null($concat) ? $this->parser()->concat() : $concat;
+        $filters = $this->filters($absolutePath, $concat);
 
-        return new FileAsset($absolutePath, $this->filters($absolutePath, $concat));
+        $temp =  new FileAsset($absolutePath, $filters);
+       
+        return $temp;
     }
 
     /**
