@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "axypro/sourcemap": "*",
+        "axy/sourcemap": "*",
         "kriswallsmith/assetic": "v1.1.2"
     },
     "autoload": {
