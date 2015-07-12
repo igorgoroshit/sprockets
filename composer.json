@@ -6,6 +6,10 @@
         {
             "name": "Kelt Dockins",
             "email": "kelt@codesleeve.com"
+        },
+        {
+            "name": "Igor Goroshit",
+            "email": "igor@webt.co.il"
         }
     ],
     "require": {
