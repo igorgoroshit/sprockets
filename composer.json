@@ -18,7 +18,7 @@
             "tests/TestCase.php"
         ],
         "psr-0": {
-            "Codesleeve\\Sprockets": "src/"
+            "Igorgoroshit\\Sprockets": "src/"
         }
     }
 }
