@@ -101,6 +101,8 @@ class SprocketsGenerator implements Interfaces\GeneratorInterface
 
         $filters = isset($this->parser()->filters[$extension]) ? $this->parser()->filters[$extension] : array();
 
+        
+
         if (!$concat)
         {
             return $filters;

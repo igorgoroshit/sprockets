@@ -53,7 +53,7 @@ class SprocketsFilter implements FilterInterface
 
         $collection = new AssetCollection($files, $global_filters);
         $content = $collection->dump();
-        $content .= "\n//# sourceMappingURL=/heshbonet/public/assets/application.js.map";
+        //$content .= "\n//# sourceMappingURL=/heshbonet/public/assets/application.js.map";
         //$map = $collection->sourcemap(null, $this->parser);
        // print_r($map);die();
         //$asset->setContent(json_encode($map));
