@@ -26,7 +26,7 @@ class SprocketsFilter implements FilterInterface
         $files = array();
 
         $absolutePath = $asset->getSourceRoot() . '/' . $asset->getSourcePath();
-
+//die($absolutePath);
         $this->parser->mime = $this->parser->mimeType($absolutePath);
 
         $absoluteFilePaths = $this->parser->getFilesArrayFromDirectives($absolutePath);
@@ -39,7 +39,14 @@ class SprocketsFilter implements FilterInterface
         // this happens when the file isn't a manifest
         if (!$absoluteFilePaths)
         {
+            $addMaps = false;
             $files[] = $this->generator->cachedFile($absolutePath);
+        }
+        // this happens when thie file is a manifest
+        else
+        {
+            $addMaps = true;
+            //print_r($this->parser);die();
         }
 
         $global_filters = $this->parser->get("sprockets_filters.{$this->parser->mime}", array());
@@ -50,13 +57,28 @@ class SprocketsFilter implements FilterInterface
             $global_filters = array_merge($global_filters, array(new Filters\JavascriptConcatenationFilter));
         }
 
-
         $collection = new AssetCollection($files, $global_filters);
-        $content = $collection->dump();
-        //$content .= "\n//# sourceMappingURL=/heshbonet/public/assets/application.js.map";
-        //$map = $collection->sourcemap(null, $this->parser);
-       // print_r($map);die();
-        //$asset->setContent(json_encode($map));
+
+        if(!isset($this->generator->sourcemap))
+        {
+            $content = $collection->dump();
+            //build source map url
+            if(!in_array($asset->getSourcePath(), $this->parser->config['block-maps-for']))
+            {
+                $prefix = $this->parser->config['routing']['prefix'];
+                if($addMaps)
+                {
+                    $sourceMapUrl = url() . $prefix . '/' . $this->parser->absolutePathToWebPath($absolutePath).'.map';
+                    $content .= "\n//# sourceMappingURL=$sourceMapUrl";              
+                }
+        
+            }
+
+        }else{
+            $map = $collection->sourcemap(null, $this->parser);
+            $content = json_encode($map);
+        }
+
         $asset->setContent($content);
     }
 

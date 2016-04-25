@@ -26,6 +26,8 @@ class SprocketsGenerator implements Interfaces\GeneratorInterface
     public function javascript($absolutePath)
     {
         $temp = $this->cached($absolutePath);
+
+        //print_r($temp);die();
         return $temp->dump();
     }
 
@@ -38,6 +40,19 @@ class SprocketsGenerator implements Interfaces\GeneratorInterface
     public function stylesheet($absolutePath)
     {
         return $this->cached($absolutePath)->dump();
+    }
+
+    /**
+    * Return the stylesheet text for this
+    *
+    * @param  $absolutePath
+    * @return string
+    */
+    public function sourcemap($absolutePath)
+    {
+        $this->sourcemap = true;
+        $temp = $this->cached($absolutePath);
+        return $temp->dump();
     }
 
     /**
@@ -101,7 +116,6 @@ class SprocketsGenerator implements Interfaces\GeneratorInterface
 
         $filters = isset($this->parser()->filters[$extension]) ? $this->parser()->filters[$extension] : array();
 
-        
 
         if (!$concat)
         {

@@ -21,28 +21,31 @@ class AssetCollection extends AsseticAssetCollection {
 
     public function sourcemap(FilterInterface $additionalFilter = null, $parser = null)
     {
-        $map = new SourceMap();
-        $line = 0;
-        $lines = 0;
-        $fileIndex = 0;
-        $count = 0;
-        $content = '';
-        $parts = array();
+        $map                = new SourceMap();
+        $prefix             = $parser->config['routing']['prefix'];
+        $map->sourceRoot    = url() . $prefix . '/';
+        $line               = 0;
+        $lines              = 0;
+        $fileIndex          = 0;
+        $count              = 0;
+        $content            = '';
+        $parts              = array();
+
         foreach ($this as $asset) {
-            
-            $fileName = $asset->getSourceRoot().'/'.$asset->getSourcePath();
-            $filePath = $parser->realFilePath($fileName);
+
+            $fileName   = $asset->getSourceRoot().'/'.$asset->getSourcePath();
+            $filePath   = $parser->absolutePathToWebPath($fileName);
 
             $content = $asset->dump($additionalFilter);
 
             $lines = substr_count($content, "\n");
             $i = 0;
 
-						$map->sources->setContent($filePath, $content);
+			$map->sources->setContent($filePath, null);
 
-            for($i = 0; $i < $lines; $i++)
+            for($i = 0; $i <= $lines; $i++)
             {
-							$map->addPosition([
+				$map->addPosition([
 
 	                'generated' => [
 	                    'line' => $line + $i,
@@ -60,7 +63,6 @@ class AssetCollection extends AsseticAssetCollection {
 
             $fileIndex++;
 
-            
 
             $line += ($lines + 1);
         }

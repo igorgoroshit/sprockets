@@ -115,6 +115,21 @@ class SprocketsParser extends Parsers\ConfigParser implements Interfaces\ParserI
     }
 
     /**
+    * Returns the absolute path to this stylesheet filename
+    *
+    * @param  string $filename
+    * @return string
+    */
+    public function absoluteSourcemapPath($filename)
+    {
+        $parser = new Parsers\DirectivesJavascriptsParser($this->config);
+
+        $temp = $parser->absolutePath($filename);
+        //die($temp);
+        return $temp;
+    }
+
+    /**
      * Returns any file with this absolute path that matches filename
      *
      * @param  string $filename
