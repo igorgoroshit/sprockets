@@ -35,6 +35,10 @@ class DependencyValidationCache implements CacheInterface
             return $isCached;
         }
 
+        //OPTIMIZATION
+        //do not check dependencies for cached files
+        return true;
+        //OPTIMIZATION
         $file = $this->asset->getSourceRoot() . '/' . $this->asset->getSourcePath();
 
         return $this->checkAllDependenciesForCache($file);

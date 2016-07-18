@@ -7,6 +7,8 @@ use Igorgoroshit\Sprockets\Cache\DependencyValidationCache;
 class ConfigParser extends \ArrayObject
 {
     public $mime = null;
+    protected static $pathCache = [];
+    protected static $stripFromEndingCache = [];
 
     /**
      * Create a new parser config object
@@ -50,17 +52,32 @@ class ConfigParser extends \ArrayObject
             return $this->config;
         }
 
+        //OPTIMIZATION
+        //return path config from cache if exist
+        if(isset(self::$pathCache[$path]))
+            return self::$pathCache[$path];
+        //OPTIMIZATION
+
         $paths = explode('.', $path);
         $config = $this->config;
 
         foreach ($paths as $path)
         {
             if (!isset($config[$path])) {
-                return $default;
+                //OPTIMIZATION
+                //store to cahce and return
+                return self::$pathCache[$path] = $default;
+                //OPTIMIZATION
+                //return $default;
             }
 
             $config = $config[$path];
         }
+
+        //OPTIMIZATION
+        //store to cahce and return
+        self::$pathCache[$path] = $config;
+        //OPTIMIZATION
 
         return $config;
     }

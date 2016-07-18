@@ -45,7 +45,7 @@ class SprocketsFilter implements FilterInterface
         // this happens when thie file is a manifest
         else
         {
-            $addMaps = true;
+            $addMaps = $this->parser->config['sourcemaps'];
             //print_r($this->parser);die();
         }
 
