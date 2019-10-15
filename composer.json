@@ -4,7 +4,7 @@
     "type": "library",
     "version": "6.0.0",
     "license": "MIT",
-    
+
     "authors": [
         {
             "name": "Kelt Dockins",
@@ -15,10 +15,18 @@
             "email": "igor@webt.co.il"
         }
     ],
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/igorgoroshit/assetic"
+        }
+    ],
+
     "require": {
         "php": "^7.2",
         "axy/sourcemap": "*",
-        "kriswallsmith/assetic": "v1.1.2"
+        "kriswallsmith/assetic": "6.0.0"
     },
     "autoload": {
         "classmap": [
