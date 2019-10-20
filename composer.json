@@ -18,22 +18,21 @@
 
     "repositories": [
         {
-            "type": "vcs",
+            "type": "git",
             "url": "https://github.com/igorgoroshit/assetic"
         }
     ],
 
     "require": {
-        "php": "^7.2",
-        "axy/sourcemap": "*",
+        "php":                   "^7.2",
+        "axy/sourcemap":         "*",
         "kriswallsmith/assetic": "6.0.0"
     },
     "autoload": {
-        "classmap": [
-            "tests/TestCase.php"
-        ],
+
         "psr-0": {
             "Igorgoroshit\\Sprockets": "src/"
         }
+
     }
 }
