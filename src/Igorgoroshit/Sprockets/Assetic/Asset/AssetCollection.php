@@ -23,7 +23,7 @@ class AssetCollection extends AsseticAssetCollection {
     {
         $map                = new SourceMap();
         $prefix             = $parser->config['routing']['prefix'];
-        $map->sourceRoot    = url() . $prefix . '/';
+        $map->sourceRoot    = url('/') . $prefix . '/';
         $line               = 0;
         $lines              = 0;
         $fileIndex          = 0;

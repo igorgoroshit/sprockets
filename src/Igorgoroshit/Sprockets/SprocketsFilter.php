@@ -68,7 +68,7 @@ class SprocketsFilter implements FilterInterface
                 $prefix = $this->parser->config['routing']['prefix'];
                 if($addMaps)
                 {
-                    $sourceMapUrl = url() . $prefix . '/' . $this->parser->absolutePathToWebPath($absolutePath).'.map';
+                    $sourceMapUrl = url('/') . $prefix . '/' . $this->parser->absolutePathToWebPath($absolutePath).'.map';
                     $content .= "\n//# sourceMappingURL=$sourceMapUrl";              
                 }
         
