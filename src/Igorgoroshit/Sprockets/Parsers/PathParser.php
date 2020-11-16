@@ -146,11 +146,29 @@ class PathParser extends ExtensionsParser
     {
         $filename = $this->base_path . '/' . $filename;
 
-        if (file_exists($filename) && is_file($filename)) {
+        if ($this->isFileInPath($filename) && file_exists($filename) && is_file($filename)) {
             return $filename;
         }
 
         return null;
+    }
+
+    protected function isFileInPath($filename)
+    {
+        
+        $base_path = $this->base_path;
+    
+        foreach ($this->paths() as $path)
+        {
+            $fullpath = realpath("$filename");
+            $realpath = realpath("$base_path/$path");
+
+            if(strpos($fullpath, $realpath) === 0) {
+                return true;
+            }
+        }
+    
+        return false;        
     }
 
     /**
