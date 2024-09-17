@@ -163,7 +163,7 @@ class PathParser extends ExtensionsParser
             $fullpath = realpath("$filename");
             $realpath = realpath("$base_path/$path");
 
-            if(strpos($fullpath, $realpath) === 0) {
+            if($realpath && $fullpath && strpos($fullpath, $realpath) === 0) {
                 return true;
             }
         }
